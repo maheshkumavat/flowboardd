@@ -39,11 +39,13 @@ function OnboardingContent() {
       if (user) {
         await supabase
           .from('profiles')
-          .update({
-            name: name.trim() || user.email.split('@')[0],
+          .upsert({
+            id: user.id,
+            email: user.email,
+            name: name.trim() || user.user_metadata?.name || user.email.split('@')[0],
             primary_role: primaryRole,
-          })
-          .eq('id', user.id);
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'id' });
       }
 
       window.location.href = `/?action=${intent}`;

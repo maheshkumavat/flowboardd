@@ -77,7 +77,8 @@ export function middleware(request) {
     pathname === '/login' ||
     pathname === '/signup' ||
     pathname === '/forgot-password' ||
-    pathname === '/account-deleted';
+    pathname === '/account-deleted' ||
+    pathname === '/auth/callback';
 
   // 3. Server-Side Protection Rules
   if (!authenticated && !isPublicAuthRoute) {
