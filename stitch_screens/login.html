@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CollabFlow - Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#767586",
+                        "on-secondary-fixed-variant": "#334282",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-container": "#03050a",
+                        "tertiary-fixed-dim": "#c3c6ce",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#43474d",
+                        "on-tertiary-fixed": "#181c21",
+                        "secondary-fixed-dim": "#b8c4ff",
+                        "tertiary-fixed": "#dfe2ea",
+                        "surface-tint": "#494bd6",
+                        "on-background": "#0b1c30",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#d3e4fe",
+                        "secondary": "#4b5a9c",
+                        "tertiary": "#5a5f65",
+                        "surface-variant": "#d3e4fe",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "primary-container": "#6063ee",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-high": "#dce9ff",
+                        "on-primary-fixed": "#07006c",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-secondary-fixed": "#001354",
+                        "outline-variant": "#c7c4d7",
+                        "inverse-surface": "#213145",
+                        "primary": "#4648d4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "surface": "#f8f9ff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-container": "#73777e",
+                        "on-primary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "on-surface-variant": "#464554",
+                        "primary-fixed": "#e1e0ff",
+                        "secondary-fixed": "#dde1ff",
+                        "surface-bright": "#f8f9ff",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#354585",
+                        "inverse-primary": "#c0c1ff",
+                        "secondary-container": "#a6b5fd",
+                        "inverse-on-surface": "#eaf1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="h-full flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface-container-low text-on-surface">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-xl p-xl shadow-[0px_10px_24px_rgba(0,0,0,0.08)] border border-outline-variant/30 flex flex-col gap-lg">
+<!-- Header -->
+<div class="text-center flex flex-col gap-sm">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">CollabFlow</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Sign in to your AI-Powered Workspace</p>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-md" onsubmit="event.preventDefault();">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface" for="email">Email</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-[12px] font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="email" name="email" required="" type="email"/>
+</div>
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline transition-all" href="#">Forgot password?</a>
+</div>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-[12px] font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="password" name="password" required="" type="password"/>
+</div>
+<button class="w-full mt-sm bg-primary text-on-primary font-title-md text-title-md rounded-lg py-[12px] px-md hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-sm" type="submit">
+                Sign In
+            </button>
+</form>
+<!-- Divider -->
+<div class="flex items-center gap-md">
+<div class="flex-1 h-px bg-outline-variant/50"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Or</span>
+<div class="flex-1 h-px bg-outline-variant/50"></div>
+</div>
+<!-- Secondary Actions -->
+<div class="flex flex-col gap-sm">
+<button class="w-full bg-surface-container border border-outline-variant text-on-surface font-title-md text-title-md rounded-lg py-[12px] px-md hover:bg-surface-container-high transition-colors flex items-center justify-center gap-sm" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-[20px]" data-icon="code">code</span>
+                Continue with GitHub
+            </button>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant mt-xs">
+                Connect later from your profile
+            </p>
+</div>
+</div>
+</body></html>

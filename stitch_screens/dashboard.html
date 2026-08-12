@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CollabFlow Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#767586",
+                        "on-secondary-fixed-variant": "#334282",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-container": "#03050a",
+                        "tertiary-fixed-dim": "#c3c6ce",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#43474d",
+                        "on-tertiary-fixed": "#181c21",
+                        "secondary-fixed-dim": "#b8c4ff",
+                        "tertiary-fixed": "#dfe2ea",
+                        "surface-tint": "#494bd6",
+                        "on-background": "#0b1c30",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#d3e4fe",
+                        "secondary": "#4b5a9c",
+                        "tertiary": "#5a5f65",
+                        "surface-variant": "#d3e4fe",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "primary-container": "#6063ee",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-high": "#dce9ff",
+                        "on-primary-fixed": "#07006c",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-secondary-fixed": "#001354",
+                        "outline-variant": "#c7c4d7",
+                        "inverse-surface": "#213145",
+                        "primary": "#4648d4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "surface": "#f8f9ff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-container": "#73777e",
+                        "on-primary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "on-surface-variant": "#464554",
+                        "primary-fixed": "#e1e0ff",
+                        "secondary-fixed": "#dde1ff",
+                        "surface-bright": "#f8f9ff",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#354585",
+                        "inverse-primary": "#c0c1ff",
+                        "secondary-container": "#a6b5fd",
+                        "inverse-on-surface": "#eaf1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row overflow-hidden">
+<!-- SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col h-screen w-64 z-50 bg-surface shadow-md py-xl px-md bg-surface-container-lowest shadow-md flex-shrink-0">
+<div class="flex items-center gap-sm mb-lg">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small, stylized organization logo for an enterprise project management tool. Minimalist, modern, using deep purple tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-_d-ozLSPA7GAqPNLkFZacCiHG9o05e76miDy1PlmyZmDNy9paAgHBRfQi6BjmhldceF0eYwv2ryQ7Q2tddJz04z6oCFyeTwIJurBLOFZ_uGCuFAAVyiaBEbAPZwMj5R7GAvMeD01rO3_24QX8dkch5n7S8Y6RF5uGPUPmDTagzujnpkn2I-5ES19iKB3AAvomUHJlRFwJkOdyC9ngJUvJsnSTlAG83CQ-MincZlJ32NRfYlmkbYyEg"/>
+<div>
+<h2 class="font-title-lg text-title-lg font-bold text-primary">Enterprise PM</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">AI-Powered Workspace</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-sm px-md rounded-lg font-title-md text-title-md mb-lg hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> New Project
+        </button>
+<ul class="flex flex-col gap-sm flex-1">
+<li class="flex items-center gap-sm py-sm px-md text-primary font-bold bg-primary-container/20 rounded-lg cursor-pointer active:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</li>
+<li class="flex items-center gap-sm py-sm px-md text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer active:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">view_kanban</span>
+<span class="font-label-md text-label-md">Kanban</span>
+</li>
+<li class="flex items-center gap-sm py-sm px-md text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer active:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Team</span>
+</li>
+<li class="flex items-center gap-sm py-sm px-md text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer active:translate-x-1 transition-transform">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</li>
+</ul>
+<div class="mt-auto">
+<ul class="flex flex-col gap-xs pt-md border-t border-surface-container-high">
+<li class="flex items-center gap-sm py-xs px-md text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer">
+<span class="material-symbols-outlined">code</span>
+<span class="font-label-md text-label-md">GitHub</span>
+</li>
+<li class="flex items-center gap-sm py-xs px-md text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer">
+<span class="material-symbols-outlined">support</span>
+<span class="font-label-md text-label-md">Help</span>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-lg h-16 bg-surface shadow-sm docked full-width top-0 z-40 bg-surface-container-low flex-shrink-0">
+<div class="flex items-center gap-md">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-on-surface-variant">search</span>
+<input class="pl-xl pr-sm py-xs bg-surface-container border-none rounded-full font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 w-48 md:w-64" placeholder="Search..." type="text"/>
+</div>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary absolute left-1/2 -translate-x-1/2 md:hidden">CollabFlow</h1>
+<div class="flex items-center gap-sm">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 transition-transform"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 transition-transform hidden md:block"><span class="material-symbols-outlined">help_outline</span></button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 transition-transform hidden md:block"><span class="material-symbols-outlined">settings</span></button>
+<img alt="User profile photo" class="w-8 h-8 rounded-full ml-sm object-cover border border-outline-variant cursor-pointer" data-alt="A professional user profile photo. Smiling person in business casual attire against a clean, light gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKJVR2S_P_pPhdHI6C3i6qZpiwH6AzC--iFcliNEHnbiEde1B5p7yo-E2R3vRoCWjBiLmftN0iuWbbpd1XxPFk89vet0-rD_-f61YOoQtceuyTeyEvWn8B1xmmzepBAB6Oa_gF8R0cM4mAcET9QH1pJ-nWX8OpvWlkl-yOmWPuPGr9JC8a1Z_SLA1ddtGTIeIpJ_KOTj-imkrkllcH1bMMEm9sGQaNCSzbeTtaF6XU6lTsd2yjPWGahA"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop bg-background">
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Active Projects</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Overview of current initiatives</p>
+</div>
+<button class="hidden md:flex bg-primary text-on-primary py-xs px-md rounded-lg font-title-md text-title-md hover:bg-on-primary-fixed-variant transition-colors items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> Create Project
+                </button>
+</div>
+<!-- Bento Grid layout for cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Project Alpha -->
+<div class="bg-surface rounded-[16px] p-md border border-[#E2E8F0] shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex flex-col hover:shadow-[0px_10px_24px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="bg-primary-container/10 p-xs rounded-lg">
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-xs">Project Alpha</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-1">Core infrastructure overhaul.</p>
+<div class="mb-md">
+<div class="flex justify-between font-label-md text-label-md text-on-surface-variant mb-xs">
+<span>Progress</span>
+<span>75%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-auto pt-md border-t border-surface-container">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Headshot of a team member, professional lighting, smiling, diverse background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWA4pEPDlE1O3iWpqekcLi8NG_9W7OhgVQbiuzrwkIWfQ4thHqnPFeh1WBsLHOmNYG-y5hhEJmI6XeaBujt5qi_-Z2ecVHcYojbkTAt7gnDe-2yLmsFFRqzvN0CzgjGvP594Sko2ReKpPhi29LDU_lTmxoTPHdHZbJuu1n-yMCuIJvVfLWJtGrukXgxHlYT64oZY61A4LinGlOFX3Zc8J6qCr0Ay7q-_sEgkUvqKbghxwvwrnt02Nvsw"/>
+<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Headshot of another team member, professional lighting, serious expression, diverse background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8Nl03J_6o1dYcpDBb034xSds4ISAdrnnZPqfONnFZS0clp6FHKnjQcdvukjZG2M2F1f50rx6YFFSioybPRWJNqqoAmg2fnsnZiUGq47BEi02p5qIeOlBhPLHD4N1hIX8YDCvGpPUMSi3jOlYzE1_yPskfWMTpIAGA0_0bQJDvMz1IhqV0ue2vxx0YAjxXycg4tYKGLBZEkqF-mKyk5Bmn5hJm8todMByRIL_-DtFa37UTKIVRKPG6Gg"/>
+<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Headshot of a third team member, professional lighting, diverse background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE169L8pfsAcOp1i_LHzOYKUNfvpAzVy0NWJeUrGZdvI1TIWiUSfQcHy5Me4kH0CZmoIuYSibOJUB7TpGhYWG1U0BbbO-U2JHEvXTo_PU1ox_EJUwAzp-0zpEi3ZLizeLIaFo8hLooOOfbjmE-aee1VVSC6K_5rPwkjZjMe1khhFdimnLClgokUQVHFcJX2AyajtMZRllnfhfKQ_b3W3J_vQobJj47GI2ffLWzJfOAvnCb33uvb56eXw"/>
+</div>
+<span class="font-label-md text-label-md bg-secondary-container/20 text-on-secondary-container px-sm py-xs rounded-full">In Progress</span>
+</div>
+</div>
+<!-- Mobile App Redesign -->
+<div class="bg-surface rounded-[16px] p-md border border-[#E2E8F0] shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex flex-col hover:shadow-[0px_10px_24px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="bg-secondary-container/20 p-xs rounded-lg">
+<span class="material-symbols-outlined text-on-secondary-container">smartphone</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-xs">Mobile App Redesign</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-1">UX update for Q3 launch.</p>
+<div class="mb-md">
+<div class="flex justify-between font-label-md text-label-md text-on-surface-variant mb-xs">
+<span>Progress</span>
+<span>40%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 40%"></div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-auto pt-md border-t border-surface-container">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Headshot of a designer, creative studio lighting, bright colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUaiJ0Xjnwv_-Je9KiMbX8xVlEf1lQM8zeDMBMjVv5A5wYi6N8GfZkYa93Uw4jjdrHN4Z_1W7dt7z_EtCuon5z1tzl8vJhcvbot99p55tvNMbrP-r0Q6tP_KR1FzDgyMZQrDHNF2rYc11oHAZf0SiZQNTkFHkYLfc-yB8rBPL-YHGSHORPWl28tQCfm0luV2qKwimi9PTm6zdVqJNn-XtAXtuDi0Ezx_ftQ0qvbpB5B3pAnd_LdCBX0g"/>
+<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Headshot of a developer, focused expression, clean background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-0kntZz5WeqP7Q_9_7Dhp3nYDHtgxbOrm_LUc9kUpgx7-1hmf1tlfloPf6VX42LwBAxv2DWPmHIgbLWRR_7SYyPxKBEQdg1mOPffxm6s3RpjTIHVMirShG0mOKRju8gHJ5tliwPMtPBUlWruzZ_1nfTHfaQk991sXffzDhYEqaKPQ_Wm3hh-8q3RUgJjTeC42bmklNQDbizqDKrtLUciTHAu8Pl_YfJ43wwzbF2LGoON8rwsx5gg-7A"/>
+<div class="w-6 h-6 rounded-full border-2 border-surface bg-surface-container-high flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant">+1</div>
+</div>
+<span class="font-label-md text-label-md bg-secondary-container/20 text-on-secondary-container px-sm py-xs rounded-full">Planning</span>
+</div>
+</div>
+<!-- Enterprise API -->
+<div class="bg-surface rounded-[16px] p-md border border-[#E2E8F0] shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex flex-col hover:shadow-[0px_10px_24px_rgba(0,0,0,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="bg-primary-container/10 p-xs rounded-lg">
+<span class="material-symbols-outlined text-primary">api</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-xs">Enterprise API</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg flex-1">Partner integration endpoints.</p>
+<div class="mb-md">
+<div class="flex justify-between font-label-md text-label-md text-on-surface-variant mb-xs">
+<span>Progress</span>
+<span>90%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-auto pt-md border-t border-surface-container">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Headshot of backend engineer, professional setting, smiling slightly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6bhYFT78-FyPPT-QLn5a7Df4xyyQ4NtVFAYNC6Fdfo8wGXgimZfTa485KbLs20-pK8FP3HKPVVqlGSeckWREUEnn0EeDPsrcmlKEOKa3wi4rQpwi9WnCk9qNJlbCErges2K3WA7YuI3TsucKZzkBl9uUnoav7ds1DOhGh72WxCoIlOiR43XPTolFEW50rglqm9AeD4UxONCV_85_FXddPIx7ubEuq3u17K6LMRLbTrojnYQKSNm6gWw"/>
+<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Headshot of product manager, clear background, approachable look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQoH67DdYzLlFm4KxWeWBVmhDWcv_rIIC2UpK8p6mOtreZXzyzriAb-pLUyEOa2V7Dx65WALySXXXTQgMKHl5Mn9LpKYz5t_yhidmcFt6Fk9kXPbCXftDU-3mnt0QdhjikPTVzjdYGldmZzI8fx-D1CIl6LFkD3nr90nrpHq2fo8FIZitbJkWAqo8lLzqJs2Edv42YLOTJAKDWyoKNMQrN2bm83bWB23G5V6clBjlbYQOqQJ1c16PkDg"/>
+<img class="w-6 h-6 rounded-full border-2 border-surface object-cover" data-alt="Headshot of technical writer, natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrmK_yzps2xb9SKBXWnWTORBRzOHHVfUyZZLW3ltj_lcUYDEVmCVUVvQNhxV4NiQTP5uNoTLFXe7JjPkUGBo9OPdzNgLA61RxfAyWUwXRdc5l2eauIIKzBfmHBl7KAC-SkcLOp3Lq3RPdd-_IOl54E9sz-tICFAommR1xhEzcuoszuegrlc4L3ofsWSIH__9kCoqrYTo2zI-r0A7ETGUmSEpqvuyyej3aI89_xaBwgRsVtx19EbPYTug"/>
+</div>
+<span class="font-label-md text-label-md bg-surface-container-high text-on-surface-variant px-sm py-xs rounded-full">Review</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom NavBar (Visible only on mobile) -->
+<nav class="md:hidden bg-surface border-t border-surface-container-low flex justify-around items-center h-16 w-full fixed bottom-0 z-50">
+<a class="flex flex-col items-center justify-center text-primary w-1/4 h-full active:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined mb-xs text-[24px]">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-1/4 h-full active:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined mb-xs text-[24px]">view_kanban</span>
+<span class="font-label-sm text-label-sm">Kanban</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-1/4 h-full active:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined mb-xs text-[24px]">groups</span>
+<span class="font-label-sm text-label-sm">Team</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant w-1/4 h-full active:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined mb-xs text-[24px]">insights</span>
+<span class="font-label-sm text-label-sm">Analytics</span>
+</a>
+</nav>
+<div class="h-16 md:hidden w-full bg-background"></div> <!-- Spacer for mobile bottom nav -->
+</body></html>

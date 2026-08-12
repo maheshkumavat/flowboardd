@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Profile - CollabFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#767586",
+                      "on-secondary-fixed-variant": "#334282",
+                      "on-surface": "#0b1c30",
+                      "on-tertiary-container": "#03050a",
+                      "tertiary-fixed-dim": "#c3c6ce",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#43474d",
+                      "on-tertiary-fixed": "#181c21",
+                      "secondary-fixed-dim": "#b8c4ff",
+                      "tertiary-fixed": "#dfe2ea",
+                      "surface-tint": "#494bd6",
+                      "on-background": "#0b1c30",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#d3e4fe",
+                      "secondary": "#4b5a9c",
+                      "tertiary": "#5a5f65",
+                      "surface-variant": "#d3e4fe",
+                      "on-primary-fixed-variant": "#2f2ebe",
+                      "primary-container": "#6063ee",
+                      "on-secondary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#eff4ff",
+                      "surface-container-high": "#dce9ff",
+                      "on-primary-fixed": "#07006c",
+                      "primary-fixed-dim": "#c0c1ff",
+                      "on-secondary-fixed": "#001354",
+                      "outline-variant": "#c7c4d7",
+                      "inverse-surface": "#213145",
+                      "primary": "#4648d4",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#cbdbf5",
+                      "surface": "#f8f9ff",
+                      "surface-container": "#e5eeff",
+                      "tertiary-container": "#73777e",
+                      "on-primary-container": "#fffbff",
+                      "on-primary": "#ffffff",
+                      "background": "#f8f9ff",
+                      "on-surface-variant": "#464554",
+                      "primary-fixed": "#e1e0ff",
+                      "secondary-fixed": "#dde1ff",
+                      "surface-bright": "#f8f9ff",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "on-secondary-container": "#354585",
+                      "inverse-primary": "#c0c1ff",
+                      "secondary-container": "#a6b5fd",
+                      "inverse-on-surface": "#eaf1ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "md": "16px",
+                      "gutter": "24px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "title-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "title-md": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row">
+<!-- SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex bg-surface dark:bg-surface-dim font-label-md text-label-md shadow-md flex-col h-screen w-64 z-50 fixed left-0 top-0 py-xl px-md border-r border-outline-variant/30">
+<div class="mb-lg px-sm">
+<h1 class="font-title-lg text-title-lg font-bold text-primary">Enterprise PM</h1>
+<p class="text-on-surface-variant mt-xs">AI-Powered Workspace</p>
+</div>
+<button class="bg-primary text-on-primary rounded-lg py-sm px-md mb-lg font-title-md text-title-md w-full hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">add</span>
+            New Project
+        </button>
+<ul class="flex flex-col gap-xs flex-1">
+<li class="px-sm py-sm rounded-lg text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-all cursor-pointer flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+                Dashboard
+            </li>
+<li class="px-sm py-sm rounded-lg text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-all cursor-pointer flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">view_kanban</span>
+                Kanban
+            </li>
+<li class="px-sm py-sm rounded-lg text-primary dark:text-primary-fixed-dim font-bold bg-primary-container/20 flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+                Team
+            </li>
+<li class="px-sm py-sm rounded-lg text-on-surface-variant dark:text-outline hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-all cursor-pointer flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">insights</span>
+                Analytics
+            </li>
+</ul>
+<ul class="flex flex-col gap-xs mt-auto pt-lg border-t border-outline-variant/30">
+<li class="px-sm py-sm rounded-lg text-on-surface-variant dark:text-outline hover:bg-surface-container transition-all cursor-pointer flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">code</span>
+                GitHub
+            </li>
+<li class="px-sm py-sm rounded-lg text-on-surface-variant dark:text-outline hover:bg-surface-container transition-all cursor-pointer flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">support</span>
+                Help
+            </li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim font-body-md text-body-md docked full-width top-0 z-40 bg-surface-container-low dark:bg-surface-container-low shadow-sm flex justify-between items-center w-full px-lg h-16 sticky">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface-variant p-sm hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim md:hidden">CollabFlow</div>
+</div>
+<div class="flex-1 max-w-md mx-auto hidden md:block px-lg relative">
+<span class="material-symbols-outlined absolute left-8 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container text-on-surface rounded-lg py-sm pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary/20 border-none h-10" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 p-sm rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 p-sm rounded-full flex items-center justify-center hidden sm:flex">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 p-sm rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="User profile photo" class="w-8 h-8 rounded-full ml-sm object-cover border border-outline-variant cursor-pointer" data-alt="A small circular user profile photo showing a young professional in a light, modern office setting. The image is brightly lit, conveying a clean, corporate minimal aesthetic with high-fidelity detailing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5j-ThDDVFda9EL_DMDna-3WL8X1aVCZGweWEJeUPNP4lkwusgsvfLOwBbvp9kcO3LglScG7WKZ_JmZ67BHcRTDHuQzBQty0Z4tML-xK8Nay6CPon4wsBqid8v4k7kyEMV4DhlxlucVmhulO6bdB5m3iEK6QJTe_O02eK-auPnMYnluoROubU2VoJHWkvix6F4msDaL7TO_N6TlDVjZgQjJ6-mjgv2zf9eEee0AHLyZpthdnoJJkgL1A"/>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop max-w-5xl mx-auto w-full flex flex-col gap-lg">
+<!-- Header Section with Avatar -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-container-high p-lg flex flex-col sm:flex-row items-center sm:items-start gap-lg w-full relative overflow-hidden">
+<!-- Abstract BG accent -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+<div class="relative group">
+<img alt="Profile Picture" class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-surface shadow-sm relative z-10" data-alt="A high-quality close-up portrait of a professional software developer looking slightly off-camera with a subtle smile. The lighting is soft and natural, emphasizing a calm, professional reliability. The background is a blurred modern workspace in soft gray tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP5x82G4snz7_owMT2tQ8t_arYVM31zu1RAYauTEwXK4uzkAX18miQbje9EdD8Dy9UPIgKRLCIw7VfyTJ40MLlV-RaWo7qrDO8ZFv8BszYwxXV4KGlE89b8JkMobZNvg1IsWc3HTaMl_Q5hdUO3PH0Ks9MQbvt0qLEA9BeuOwSYswbysi3LEh1DtSYu43Os4zHMTyc_ZaunVCvKwyDBOQaBleP6UVsa9N13fW8RSwqSScWqqefsYrP2g"/>
+<button class="absolute bottom-0 right-0 bg-surface rounded-full p-xs shadow-md border border-outline-variant text-on-surface-variant hover:text-primary transition-colors z-20 opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+</div>
+<div class="flex-1 text-center sm:text-left z-10">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Alex Chen</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-md">Senior Frontend Engineer</p>
+<div class="flex flex-wrap justify-center sm:justify-start gap-sm mb-lg">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-md text-label-md border border-outline-variant/30">
+<span class="material-symbols-outlined text-[16px]">location_on</span> San Francisco, CA
+                        </span>
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-md text-label-md border border-outline-variant/30">
+<span class="material-symbols-outlined text-[16px]">domain</span> TechFlow Inc.
+                        </span>
+</div>
+</div>
+<div class="z-10 mt-sm sm:mt-0">
+<button class="bg-surface hover:bg-surface-container text-on-surface border border-outline-variant rounded-lg px-md py-sm font-title-md text-title-md transition-colors flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">code</span>
+                        Connect GitHub
+                    </button>
+</div>
+</section>
+<!-- Skills Section -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-surface-container-high p-lg flex flex-col gap-lg relative">
+<div class="absolute inset-0 border border-primary/30 rounded-xl pointer-events-none opacity-50 mix-blend-overlay"></div> <!-- AI Elevation Hint -->
+<div class="flex justify-between items-center flex-wrap gap-sm">
+<div class="flex items-center gap-sm">
+<h3 class="font-title-lg text-title-lg text-on-surface">Skill Profile</h3>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm border border-primary/20">
+<span class="material-symbols-outlined text-[12px]">auto_awesome</span> AI Verified
+                         </span>
+</div>
+<button class="text-primary hover:bg-primary-container/10 px-sm py-xs rounded-md transition-colors flex items-center gap-xs font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+                        Refresh Skill Profile
+                    </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl mt-sm">
+<!-- Skill Tags (Bento-ish block) -->
+<div class="bg-surface-bright rounded-lg p-md border border-outline-variant/20 flex flex-col gap-md">
+<h4 class="font-title-md text-title-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">auto_awesome_mosaic</span>
+                             Core Competencies
+                        </h4>
+<div class="flex flex-wrap gap-sm">
+<span class="px-3 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-body-md text-body-md border border-secondary/20 hover:bg-secondary-container/30 transition-colors cursor-default">React</span>
+<span class="px-3 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-body-md text-body-md border border-secondary/20 hover:bg-secondary-container/30 transition-colors cursor-default">TypeScript</span>
+<span class="px-3 py-1.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-body-md text-body-md border border-secondary/20 hover:bg-secondary-container/30 transition-colors cursor-default">Tailwind CSS</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-body-md text-body-md border border-outline-variant/30 hover:bg-surface-container-high transition-colors cursor-default">Node.js</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-body-md text-body-md border border-outline-variant/30 hover:bg-surface-container-high transition-colors cursor-default">SQL</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-body-md text-body-md border border-outline-variant/30 hover:bg-surface-container-high transition-colors cursor-default">GraphQL</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-body-md text-body-md border border-outline-variant/30 hover:bg-surface-container-high transition-colors cursor-default">Figma</span>
+</div>
+</div>
+<!-- Skill Bars (Bento-ish block) -->
+<div class="bg-surface-bright rounded-lg p-md border border-outline-variant/20 flex flex-col gap-md">
+<h4 class="font-title-md text-title-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">bar_chart</span>
+                             Proficiency Matrix
+                        </h4>
+<div class="flex flex-col gap-sm">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between text-label-md font-label-md text-on-surface-variant mb-1">
+<span>Frontend Architecture</span>
+<span>92%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-2 rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between text-label-md font-label-md text-on-surface-variant mb-1">
+<span>UI/UX Implementation</span>
+<span>88%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div>
+<div class="flex justify-between text-label-md font-label-md text-on-surface-variant mb-1">
+<span>Backend Integration</span>
+<span>65%</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 overflow-hidden">
+<div class="bg-outline h-2 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

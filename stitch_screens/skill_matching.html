@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CollabFlow - Task Assignment</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#767586",
+                        "on-secondary-fixed-variant": "#334282",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-container": "#03050a",
+                        "tertiary-fixed-dim": "#c3c6ce",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#43474d",
+                        "on-tertiary-fixed": "#181c21",
+                        "secondary-fixed-dim": "#b8c4ff",
+                        "tertiary-fixed": "#dfe2ea",
+                        "surface-tint": "#494bd6",
+                        "on-background": "#0b1c30",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#d3e4fe",
+                        "secondary": "#4b5a9c",
+                        "tertiary": "#5a5f65",
+                        "surface-variant": "#d3e4fe",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "primary-container": "#6063ee",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-high": "#dce9ff",
+                        "on-primary-fixed": "#07006c",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-secondary-fixed": "#001354",
+                        "outline-variant": "#c7c4d7",
+                        "inverse-surface": "#213145",
+                        "primary": "#4648d4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "surface": "#f8f9ff",
+                        "surface-container": "#e5eeff",
+                        "tertiary-container": "#73777e",
+                        "on-primary-container": "#fffbff",
+                        "on-primary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "on-surface-variant": "#464554",
+                        "primary-fixed": "#e1e0ff",
+                        "secondary-fixed": "#dde1ff",
+                        "surface-bright": "#f8f9ff",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#354585",
+                        "inverse-primary": "#c0c1ff",
+                        "secondary-container": "#a6b5fd",
+                        "inverse-on-surface": "#eaf1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter", "sans-serif"],
+                        "display-lg": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "title-lg": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-lg-mobile": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen overflow-hidden selection:bg-primary/20">
+<!-- App Layout Shell -->
+<div class="flex h-screen w-full">
+<!-- Shared Component: SideNavBar -->
+<aside class="hidden md:flex flex-col h-full py-xl px-md bg-surface shadow-md fixed left-0 top-0 h-screen w-64 z-40 border-r border-surface-container">
+<!-- Header -->
+<div class="flex items-center gap-3 mb-xl px-sm">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 shadow-sm border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A minimalist geometric logo for an enterprise software company, featuring intersecting deep purple and silver shapes on a pristine white background. The aesthetic is clean, corporate, and highly professional, utilizing the brand's primary colors in a well-lit, high-key studio environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZpG8icuOQs3Oatm8gGIGt8sAOuc9mh1iAyg5_rTpLVyzFV_zfRaYiQo3ngi-w6GEgDpgkuZ5EA3NlLsCXPU88uaxW8kSPH4k5zHkP79WtVpcKUNS6CxdRpPF49uCpYFgo7_RR6GEHSuu32cNLshNGiQNxblnqz2Z2G2BuJUYibSB44Zkd-uPiF98GnxXO3mi_IrqFuwq5jV0q2lzQtO3_QiCQ7uum-wOpwQrUBUJoJdwOCrP_1rpTdg"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-lg text-title-lg font-bold text-primary truncate">Enterprise PM</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">AI-Powered Workspace</span>
+</div>
+</div>
+<!-- CTA -->
+<button class="mb-lg mx-sm py-2.5 px-4 bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Project
+            </button>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-1">
+<!-- Dashboard (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Kanban (Active - based on context of overlaying a kanban board) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary font-bold bg-primary-container/20 cursor-pointer active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">view_kanban</span>
+<span class="font-label-md text-label-md">Kanban</span>
+</a>
+<!-- Team (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Team</span>
+</a>
+<!-- Analytics (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</nav>
+<!-- Footer Links -->
+<div class="mt-auto flex flex-col gap-1 border-t border-surface-container-high pt-4">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[20px]">code</span>
+<span class="font-label-md text-label-md">GitHub</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[20px]">support</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col w-full md:ml-64 relative">
+<!-- Shared Component: TopAppBar -->
+<header class="flex justify-between items-center w-full px-lg h-16 bg-surface shadow-sm sticky top-0 z-30">
+<!-- Left: Search -->
+<div class="flex-1 max-w-md">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 font-body-md text-body-md text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all outline-none" placeholder="Search tasks, docs..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden ml-2 cursor-pointer border border-surface-container-high hover:border-primary transition-colors">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a diverse team leader in their late 20s. They are smiling subtly, wearing a smart casual dark navy blazer. The lighting is soft and flattering, creating a high-end corporate portrait feel against a clean, light gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcaGX8yoOWWRmHGv_1qVIHz_oWay_6fx2uWTx7eYi3BTpt-uY3FNNs9rMmXjKpe14KfhgBJcdZKoTb3Yp0nxoLal9rl2VjxPdgm8mNTP685-0SA9xbMw-wl5JrtdqdrzbTK16op4_xPc3-UZc3UV_3eBevLOBKYf42Pq0iwA0kZCYOiZQQfPu7AiSabkCp0srreZw_wiT8xWl80j26e2cO4TgczZxLY_4Nn5feTRJhIEqeBkMXFHQMxQ"/>
+</div>
+</div>
+</header>
+<!-- Kanban Background (Blurred/Scrimmed by overlay) -->
+<main class="flex-1 p-lg overflow-x-auto flex gap-6 bg-[#F8FAFC]">
+<!-- Column 1 -->
+<div class="w-80 shrink-0 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="font-title-md text-title-md text-on-surface">To Do</h3>
+<span class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">3</span>
+</div>
+<!-- Fake Card -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#E2E8F0] flex flex-col gap-3">
+<div class="flex items-start justify-between">
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-2 py-0.5 rounded-full">High Priority</span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">more_horiz</span>
+</div>
+<h4 class="font-title-md text-title-md text-on-surface leading-tight">Implement Authentication Flow</h4>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Set up OAuth2 and JWT token management for the new microservice architecture.</p>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-surface-container">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-high border border-surface-container-lowest flex items-center justify-center text-[10px] text-on-surface-variant">?</div>
+</div>
+<span class="font-label-sm text-label-sm text-outline flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 12</span>
+</div>
+</div>
+<!-- Fake Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#E2E8F0] flex flex-col gap-3">
+<h4 class="font-title-md text-title-md text-on-surface leading-tight">Database Migration Script</h4>
+</div>
+</div>
+<!-- Column 2 -->
+<div class="w-80 shrink-0 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="font-title-md text-title-md text-on-surface">In Progress</h3>
+<span class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">1</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-[#E2E8F0] opacity-50">
+<h4 class="font-title-md text-title-md text-on-surface leading-tight">Design System Update</h4>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- MODAL OVERLAY: Skill-Matching Suggestion Panel -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/30 backdrop-blur-[2px] p-4 transition-opacity duration-300">
+<!-- AI Elevation Wrapper (1px border using AI gradient at 30% opacity) -->
+<div class="relative w-full max-w-md p-[1px] rounded-[17px] shadow-[0_10px_24px_rgba(0,0,0,0.12)] bg-gradient-to-br from-primary/40 via-secondary-container/20 to-primary/40 transform scale-100 transition-transform duration-300">
+<!-- Modal Canvas -->
+<div class="w-full bg-surface-container-lowest rounded-2xl flex flex-col overflow-hidden">
+<!-- Header Area -->
+<div class="px-xl pt-xl pb-4 border-b border-surface-container-low flex justify-between items-start">
+<div class="flex flex-col gap-3">
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Assign Task</h2>
+<!-- AI Sparkle Badge -->
+<div class="inline-flex items-center gap-1.5 bg-primary/10 text-primary font-label-md text-label-md px-3 py-1.5 rounded-full border border-primary/20 shadow-sm w-fit">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>AI-Suggested Assignees</span>
+</div>
+</div>
+<button aria-label="Close modal" class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-full p-1.5 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Suggestions List -->
+<div class="p-4 flex flex-col gap-2 bg-[#F8FAFC]">
+<!-- Row 1: Sarah Chen (Top Match) -->
+<div class="group flex items-center gap-4 p-3 rounded-xl bg-surface-container-lowest border border-transparent hover:border-primary/20 hover:shadow-sm transition-all cursor-default relative overflow-hidden">
+<!-- Subtle highlight background for top match on hover -->
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative z-10 w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A highly professional corporate portrait of an East Asian woman, Sarah Chen, in her early 30s. She is smiling confidently, wearing a crisp white blouse. The background is a soft, blurred modern office environment with cool, natural lighting enhancing a clean, light-mode design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdFrVSb7D_uZDggkXUlaKf1MGsq9IzBGe66LnpE2agv6CpFqZq-kntUXkLclG3M5fkceQXw4rSNDntPaTgRWgqKES4M5YsgLt6xj1H58YhJYGwDp_EYXuPqsP73AO10Tj3NnDvIVvwQAyWb6ZbVtLl6YU3fax7HxsVMRgC3HXDOi2elpmUmKf3MFFs8FvBKs_SDNXGwgeJ3C7TOIK_Qx2j7Nftxt35SnauinENHu78YHWqGrExY1JDDg"/>
+</div>
+<div class="relative z-10 flex-1 min-w-0 flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-title-md text-title-md text-on-surface truncate">Sarah Chen</span>
+<span class="font-label-md text-label-md text-primary font-bold">92% match</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-[13px] truncate">Java Developer • Senior</span>
+<!-- Match Bar -->
+<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="92" class="mt-1 h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden" role="progressbar">
+<div class="h-full bg-primary rounded-full w-[92%] transition-all duration-1000 ease-out"></div>
+</div>
+</div>
+<button class="relative z-10 shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-surface-container text-on-surface-variant hover:bg-primary hover:text-on-primary transition-colors focus:ring-2 focus:ring-primary/20 outline-none">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<!-- Row 2: John Doe -->
+<div class="group flex items-center gap-4 p-3 rounded-xl bg-surface-container-lowest border border-transparent hover:border-outline-variant/30 transition-all cursor-default">
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a Caucasian man, John Doe, in his late 20s. He has a friendly expression, wearing a casual gray button-down shirt. The lighting is soft and even, set against a pristine, minimalist light-gray background suitable for an enterprise software profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4Egn9YC1z-xOD1Rt8NO3rwqkPGHdxs0FWEHn5H7nMVPwnyuqz8r8DyuiuYFRhwQGeeWvtrmKqQ6mg6BKPQEoDkLzH-YNVULM2_o040dUZLGFVZuTMhUkUscUAVwefli7FFgJi1rDdLrztraDLmdfDdwCrrs-SI4VRFGmuyXrsDIWnQ91xuIg8Kg7i2bxDUBQJwH7-6Mxmf9RvLRmqpEDX0NxtL6jhI968s6cmU8nbRV0mf35RuFK83Q"/>
+</div>
+<div class="flex-1 min-w-0 flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-title-md text-title-md text-on-surface truncate">John Doe</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">75% match</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-[13px] truncate">Backend Engineer • Mid</span>
+<!-- Match Bar -->
+<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" class="mt-1 h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden" role="progressbar">
+<div class="h-full bg-secondary rounded-full w-[75%] transition-all duration-1000 ease-out opacity-80"></div>
+</div>
+</div>
+<button class="shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-surface-container text-on-surface-variant hover:bg-primary hover:text-on-primary transition-colors focus:ring-2 focus:ring-primary/20 outline-none">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<!-- Row 3: Alex Kim -->
+<div class="group flex items-center gap-4 p-3 rounded-xl bg-surface-container-lowest border border-transparent hover:border-outline-variant/30 transition-all cursor-default opacity-80 hover:opacity-100">
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A clean, professional portrait of a person of Korean descent, Alex Kim. They are wearing a modern, dark-colored turtleneck. The aesthetic is highly polished and minimal, with bright, diffused light creating a soft, trustworthy appearance suited for a tech platform avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoVonI7x8gPGx3i3GYt8lEgyhnQ8NrmCqAO_7_aZOHZwPp9jZNiDvet019kLYU3ahKcKzrcw12RmcKOsObI4pesNA4LaHrKXovv9ba_nBQOaYugVA6bSpWCn6d2nAP8jLESAOcOg0fLQciJKvHLgTkJktr1yZqju32Nz5c8tGF3TJDZcM5TCAfspF0zTaqg7ht5tm_laXhPExK7xEANCvowbwT0uXDSjZKdZStNs7u8oAdPBwHSbgWVQ"/>
+</div>
+<div class="flex-1 min-w-0 flex flex-col gap-1">
+<div class="flex justify-between items-baseline">
+<span class="font-title-md text-title-md text-on-surface truncate">Alex Kim</span>
+<span class="font-label-md text-label-md text-outline font-semibold">40% match</span>
+</div>
+<span class="font-body-md text-body-md text-outline text-[13px] truncate">Fullstack Dev • Junior</span>
+<!-- Match Bar -->
+<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" class="mt-1 h-1.5 w-full bg-surface-container-high rounded-full overflow-hidden" role="progressbar">
+<div class="h-full bg-tertiary rounded-full w-[40%] transition-all duration-1000 ease-out opacity-60"></div>
+</div>
+</div>
+<button class="shrink-0 w-8 h-8 rounded-full flex items-center justify-center bg-surface-container text-on-surface-variant hover:bg-primary hover:text-on-primary transition-colors focus:ring-2 focus:ring-primary/20 outline-none">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+</div>
+<!-- Footer Action (Optional context enhancement) -->
+<div class="p-xl border-t border-surface-container-low bg-surface-container-lowest flex justify-end">
+<button class="px-4 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">
+                        View all team members
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Script to simulate simple progress bar animation on load -->
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Trigger reflow to ensure CSS transitions play out
+            setTimeout(() => {
+                const bars = document.querySelectorAll('[role="progressbar"] > div');
+                bars.forEach(bar => {
+                    const targetWidth = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = bar.parentElement.getAttribute('aria-valuenow') + '%';
+                    }, 50);
+                });
+            }, 100);
+        });
+    </script>
+</body></html>

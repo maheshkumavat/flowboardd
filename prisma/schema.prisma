@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String          @id @default(uuid())
+  name              String
+  email             String          @unique
+  passwordHash      String
+  avatarUrl         String?
+  githubUsername    String?
+  githubAccessToken String?
+  skillProfile      String?         // Stored as JSON string: {"Java": 0.8, "React": 0.6}
+  role              String          @default("MEMBER")
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  ownedProjects     Project[]       @relation("ProjectOwner")
+  projectMemberships ProjectMember[]
+  assignedTasks     Task[]
+  comments          Comment[]
+}
+
+model Project {
+  id          String          @id @default(uuid())
+  name        String
+  description String?
+  ownerId     String
+  owner       User            @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  members     ProjectMember[]
+  columns     Column[]
+  tasks       Task[]
+}
+
+model ProjectMember {
+  id        String   @id @default(uuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      String   @default("MEMBER") // ADMIN, MEMBER
+  joinedAt  DateTime @default(now())
+
+  @@unique([projectId, userId])
+}
+
+model Column {
+  id        String   @id @default(uuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  tasks     Task[]
+}
+
+model Task {
+  id            String    @id @default(uuid())
+  projectId     String
+  project       Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  columnId      String
+  column        Column    @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  title         String
+  description   String?
+  assigneeId    String?
+  assignee      User?     @relation(fields: [assigneeId], references: [id], onDelete: SetNull)
+  dueDate       DateTime?
+  priority      String    @default("MEDIUM") // LOW, MEDIUM, HIGH
+  status        String    @default("To Do")
+  requiredSkill String?   // e.g. "Backend", "React", "Java", "SQL"
+  riskFlag      Boolean   @default(false)
+  position      Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  comments      Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  taskId    String
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   String
+  createdAt DateTime @default(now())
+}
