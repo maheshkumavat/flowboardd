@@ -180,7 +180,7 @@ function DashboardContent() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: projectName.trim(),
-          keyPoints: projectKeyPoints.trim(),
+          keyPoints: projectDesc.trim() || projectKeyPoints.trim(),
           projectType,
           complexity,
         }),
@@ -566,9 +566,24 @@ function DashboardContent() {
                       </div>
 
                       {/* Description */}
-                      <p className="text-[13px] text-[#52525B] line-clamp-2 mb-4">
-                        {p.description || 'No description provided.'}
-                      </p>
+                      <div className="text-[13px] text-[#52525B] line-clamp-2 mb-4 leading-normal">
+                        {p.description ? (
+                          <ReactMarkdown
+                            components={{
+                              p: ({ node, ...props }) => <span className="mr-1 inline" {...props} />,
+                              strong: ({ node, ...props }) => <strong className="font-semibold text-[#18181B]" {...props} />,
+                              h1: ({ node, ...props }) => <strong className="font-semibold text-[#18181B] mr-1" {...props} />,
+                              h2: ({ node, ...props }) => <strong className="font-semibold text-[#18181B] mr-1" {...props} />,
+                              ul: ({ node, ...props }) => <span className="inline" {...props} />,
+                              li: ({ node, ...props }) => <span className="mr-1 inline" {...props} />,
+                            }}
+                          >
+                            {p.description}
+                          </ReactMarkdown>
+                        ) : (
+                          'No description provided.'
+                        )}
+                      </div>
 
                       {/* Tech Stack Chips */}
                       {skills.length > 0 && (

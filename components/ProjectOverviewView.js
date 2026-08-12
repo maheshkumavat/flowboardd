@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 export default function ProjectOverviewView({
   project,
@@ -63,9 +64,24 @@ export default function ProjectOverviewView({
               </span>
             </div>
 
-            <p className="text-[14px] text-[#52525B] font-normal mt-1">
-              {project?.description || 'Collaborative team workspace.'}
-            </p>
+            {project?.description ? (
+              <div className="text-[14px] text-[#3F3F46] font-normal mt-2 leading-relaxed prose prose-sm max-w-none">
+                <ReactMarkdown
+                  components={{
+                    h1: ({ node, ...props }) => <h1 className="text-[16px] font-bold text-[#18181B] mt-3 mb-1" {...props} />,
+                    h2: ({ node, ...props }) => <h2 className="text-[15px] font-bold text-[#18181B] mt-3 mb-1" {...props} />,
+                    p: ({ node, ...props }) => <p className="mb-2 text-[#3F3F46]" {...props} />,
+                    strong: ({ node, ...props }) => <strong className="font-semibold text-[#18181B]" {...props} />,
+                    ul: ({ node, ...props }) => <ul className="list-disc list-inside mb-2 pl-1 text-[#3F3F46]" {...props} />,
+                    li: ({ node, ...props }) => <li className="mb-0.5" {...props} />,
+                  }}
+                >
+                  {project.description}
+                </ReactMarkdown>
+              </div>
+            ) : (
+              <p className="text-[14px] text-[#52525B] font-normal mt-1">Collaborative team workspace.</p>
+            )}
 
             {skills.length > 0 && (
               <div className="flex flex-wrap gap-1.5 mt-2">
