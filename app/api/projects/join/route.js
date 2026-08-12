@@ -70,7 +70,7 @@ export async function POST(req) {
     const ownerId = codeData.project?.owner_id;
 
     if (ownerId && ownerId !== user.id) {
-      addNotification({
+      await addNotification({
         userId: ownerId,
         type: 'join_request',
         author: requesterName,

@@ -169,7 +169,7 @@ export async function PUT(req, { params }) {
       ? `You have been promoted to Admin in project "${projectName}" by ${adminName}.`
       : `Your role in project "${projectName}" has been updated to ${targetRole} by ${adminName}.`;
 
-    addNotification({
+    await addNotification({
       userId: memberRow.user_id,
       type: isPromoted ? 'role_promoted' : 'role_updated',
       author: adminName,

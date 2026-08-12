@@ -97,7 +97,7 @@ export async function PUT(req, { params }) {
 
         // Item 6: Create real-time task assignment notification for assignee
         if (body.assigneeId && body.assigneeId !== currentUserId) {
-          addNotification({
+          await addNotification({
             userId: body.assigneeId,
             type: 'task_assigned',
             author: currentUser?.user_metadata?.name || currentUser?.email?.split('@')[0] || 'Admin',

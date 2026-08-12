@@ -88,7 +88,7 @@ export async function POST(req, { params }) {
         });
 
         // Notify requester
-        addNotification({
+        await addNotification({
           userId: targetUserId,
           type: 'assign',
           author: adminUser.user_metadata?.name || adminUser.email,
@@ -101,12 +101,12 @@ export async function POST(req, { params }) {
       if (finalRequestId) {
         await updateJoinRequestStatus(finalRequestId, 'approved');
       }
-      updateNotificationStatusByRequestId({ requestId: finalRequestId, projectId, requesterId: targetUserId, status: 'approved' });
+      await updateNotificationStatusByRequestId({ requestId: finalRequestId, projectId, requesterId: targetUserId, status: 'approved' });
 
       return NextResponse.json({ message: 'Join request accepted and member added!', status: 'approved' });
     } else if (action === 'reject' || action === 'decline') {
       if (targetUserId) {
-        addNotification({
+        await addNotification({
           userId: targetUserId,
           type: 'join_request',
           author: adminUser.user_metadata?.name || adminUser.email,
@@ -119,7 +119,7 @@ export async function POST(req, { params }) {
       if (finalRequestId) {
         await updateJoinRequestStatus(finalRequestId, 'rejected');
       }
-      updateNotificationStatusByRequestId({ requestId: finalRequestId, projectId, requesterId: targetUserId, status: 'rejected' });
+      await updateNotificationStatusByRequestId({ requestId: finalRequestId, projectId, requesterId: targetUserId, status: 'rejected' });
 
       return NextResponse.json({ message: 'Join request rejected.', status: 'rejected' });
     } else {

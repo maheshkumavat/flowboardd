@@ -153,29 +153,6 @@ export async function DELETE(req) {
       return NextResponse.json({ error: 'Failed to delete user authentication credentials' }, { status: 500 });
     }
 
-    // 6. Clean up fallback stores if present
-    try {
-      const fs = await import('fs');
-      const path = await import('path');
-      const DATA_DIR = path.join(process.cwd(), '.data');
-      const NOTIFS_FILE = path.join(DATA_DIR, 'notifications_store.json');
-      const INVITES_FILE = path.join(DATA_DIR, 'invites_store.json');
-
-      if (fs.existsSync(NOTIFS_FILE)) {
-        const notifs = JSON.parse(fs.readFileSync(NOTIFS_FILE, 'utf8') || '[]');
-        const filtered = notifs.filter((n) => n.userId !== user.id && n.requesterId !== user.id);
-        fs.writeFileSync(NOTIFS_FILE, JSON.stringify(filtered, null, 2));
-      }
-
-      if (fs.existsSync(INVITES_FILE)) {
-        const store = JSON.parse(fs.readFileSync(INVITES_FILE, 'utf8') || '{}');
-        if (store.joinRequests) {
-          store.joinRequests = store.joinRequests.filter((r) => r.user_id !== user.id);
-        }
-        fs.writeFileSync(INVITES_FILE, JSON.stringify(store, null, 2));
-      }
-    } catch (e) {}
-
     return NextResponse.json({ message: 'Account permanently deleted successfully', deleted: true });
   } catch (error) {
     console.error('Delete account DELETE error:', error);

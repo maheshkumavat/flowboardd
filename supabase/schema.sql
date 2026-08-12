@@ -402,8 +402,16 @@ alter publication supabase_realtime add table public.project_messages;
 create table if not exists public.notifications (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references public.profiles(id) on delete cascade not null,
-  title text not null,
-  message text not null,
+  type text default 'general',
+  author text default 'FlowBoard',
+  action text,
+  text text not null,
+  project_id uuid references public.projects(id) on delete cascade,
+  task_id uuid references public.tasks(id) on delete cascade,
+  request_id text,
+  requester_id uuid references public.profiles(id) on delete cascade,
+  role text default 'MEMBER',
+  status text,
   read boolean default false,
   created_at timestamptz default now()
 );
@@ -413,6 +421,7 @@ alter table public.notifications enable row level security;
 drop policy if exists "Users can view own notifications" on public.notifications;
 drop policy if exists "Users can update own notifications" on public.notifications;
 drop policy if exists "Users can delete own notifications" on public.notifications;
+drop policy if exists "Users/Admins can insert notifications" on public.notifications;
 
 create policy "Users can view own notifications" on public.notifications
   for select using (auth.uid() = user_id);
@@ -422,5 +431,11 @@ create policy "Users can update own notifications" on public.notifications
 
 create policy "Users can delete own notifications" on public.notifications
   for delete using (auth.uid() = user_id);
+
+create policy "Users/Admins can insert notifications" on public.notifications
+  for insert with check (true);
+
+alter publication supabase_realtime add table public.notifications;
+
 
 
