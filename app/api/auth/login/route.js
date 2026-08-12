@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
-import prisma from '../../../../lib/db';
-import { signToken, createAuthCookie } from '../../../../lib/auth';
+import { supabase } from '../../../../lib/supabase';
 import { checkRateLimit, getClientIp } from '../../../../lib/rateLimit';
 
 export async function POST(req) {
@@ -22,42 +20,20 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: email.toLowerCase().trim() },
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.trim(),
+      password,
     });
 
-    if (!user) {
-      return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+    if (error || !data.user) {
+      return NextResponse.json({ error: error?.message || 'Invalid email or password' }, { status: 401 });
     }
 
-    const isValid = await bcrypt.compare(password, user.passwordHash);
-    if (!isValid) {
-      return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
-    }
-
-    const token = signToken({ userId: user.id, email: user.email, name: user.name });
-    const cookieHeader = createAuthCookie(token);
-
-    let parsedSkills = {};
-    if (user.skillProfile) {
-      try {
-        parsedSkills = JSON.parse(user.skillProfile);
-      } catch (e) {}
-    }
-
-    const res = NextResponse.json({
+    return NextResponse.json({
       message: 'Login successful',
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        githubUsername: user.githubUsername,
-        skillProfile: parsedSkills,
-      },
+      user: data.user,
+      session: data.session,
     });
-
-    res.headers.append('Set-Cookie', cookieHeader);
-    return res;
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json({ error: 'Internal server error during login' }, { status: 500 });
