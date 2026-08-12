@@ -38,9 +38,11 @@ export async function POST(req, { params }) {
       createdBy: user.id,
     });
 
-    const host = req.headers.get('host') || 'localhost:3000';
-    const protocol = req.headers.get('x-forwarded-proto') || 'http';
-    const inviteLink = `${protocol}://${host}/invite/accept?token=${token}`;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '') : null;
+    const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || 'flowboardd.vercel.app';
+    const protocol = req.headers.get('x-forwarded-proto') || (host.includes('localhost') ? 'http' : 'https');
+    const origin = siteUrl || `${protocol}://${host}`;
+    const inviteLink = `${origin}/invite/accept?token=${token}`;
 
     const resendApiKey = process.env.RESEND_API_KEY;
 
