@@ -66,8 +66,8 @@ function SignupForm() {
 
   const handleOAuthLogin = async (provider) => {
     try {
-      const origin = typeof window !== 'undefined' ? window.location.origin : '';
-      const redirectUrl = `${origin}/onboarding?intent=${encodeURIComponent(intent || 'create')}`;
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '') : (typeof window !== 'undefined' ? window.location.origin : '');
+      const redirectUrl = `${siteUrl}/auth/callback?intent=${encodeURIComponent(intent || 'create')}`;
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
         provider,
         options: {

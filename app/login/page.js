@@ -2,17 +2,26 @@
 
 export const dynamic = 'force-dynamic';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { supabase } from '../../lib/supabase';
 import FlowBoardLogo from '../../components/FlowBoardLogo';
 
-export default function LoginPage() {
+function LoginForm() {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const err = searchParams.get('error');
+    if (err) {
+      setError(err);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,10 +46,11 @@ export default function LoginPage() {
 
   const handleOAuthLogin = async (provider) => {
     try {
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ? process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, '') : (typeof window !== 'undefined' ? window.location.origin : '');
       const { error: oauthError } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${window.location.origin}/`,
+          redirectTo: `${siteUrl}/auth/callback`,
         },
       });
       if (oauthError) throw oauthError;
@@ -190,5 +200,13 @@ export default function LoginPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FAFAFA] flex items-center justify-center text-[#71717A] text-[14px]">Loading login...</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }

@@ -34,10 +34,11 @@ function isTokenValid(token) {
 export function middleware(request) {
   const { pathname } = request.nextUrl;
 
-  // 1. Skip static assets, Next.js internals, and public static files
+  // 1. Skip static assets, Next.js internals, auth callbacks, and public static files
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
+    pathname.startsWith('/auth/callback') ||
     pathname.startsWith('/stitch_screens') ||
     pathname.includes('.') ||
     pathname === '/favicon.ico'
